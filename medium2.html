@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AJAX</title>
+</head>
+    <body>
+         
+        <h1>Offbrand Weather Channel</h1>
+        <div id="weather"></div>
+
+        <p>Type in your city to see the weather.</p>
+        <form action="GET">
+            <input type="text" placeholder="City Name" id="city">
+            <input type="submit">
+        </form>
+    <script> 
+    // MEDIUMPT. 2: Add an input field and button on your page that let's the user enter a city and update the weather to the city of their choosing. Handle errors if a user enters bad input.
+        const output = document.getElementById('weather');
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=4bd2c02d768c7b608281b6556d74091b`;
+        let city = document.getElementById('city');
+        fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                let html = ''
+                html += `<h2>The weather in ${data.name} is ${data.main.temp} and ${data.weather[0].description}</h2>`
+                output.innerHTML = html;
+                // console.log(html)
+                // console.log(output);
+
+            })
+            .catch(function(error) {
+                console.log(error);
+            });   
+        </script>
+    </body>
+</html>
